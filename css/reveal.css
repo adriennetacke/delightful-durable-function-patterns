@@ -77,29 +77,29 @@ body {
     text-decoration: line-through; }
 
 .reveal .slides section .fragment.fade-up {
-  -webkit-transform: translate(0, 20%);
-          transform: translate(0, 20%); }
+  -webkit-transform: translate(0, 40px);
+          transform: translate(0, 40px); }
   .reveal .slides section .fragment.fade-up.visible {
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); }
 
 .reveal .slides section .fragment.fade-down {
-  -webkit-transform: translate(0, -20%);
-          transform: translate(0, -20%); }
+  -webkit-transform: translate(0, -40px);
+          transform: translate(0, -40px); }
   .reveal .slides section .fragment.fade-down.visible {
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); }
 
 .reveal .slides section .fragment.fade-right {
-  -webkit-transform: translate(-20%, 0);
-          transform: translate(-20%, 0); }
+  -webkit-transform: translate(-40px, 0);
+          transform: translate(-40px, 0); }
   .reveal .slides section .fragment.fade-right.visible {
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); }
 
 .reveal .slides section .fragment.fade-left {
-  -webkit-transform: translate(20%, 0);
-          transform: translate(20%, 0); }
+  -webkit-transform: translate(40px, 0);
+          transform: translate(40px, 0); }
   .reveal .slides section .fragment.fade-left.visible {
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); }
@@ -241,8 +241,8 @@ body {
     color: currentColor;
     -webkit-transform: scale(0.9999);
             transform: scale(0.9999);
-    transition: color 0.2s ease, opacity 0.2s ease, -webkit-transform 0.2s ease;
-    transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+    transition: color 0.2s ease, opacity 0.2s ease, -webkit-transform 0.2s ease;
+    transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
     z-index: 2;
     pointer-events: auto;
     font-size: inherit;
