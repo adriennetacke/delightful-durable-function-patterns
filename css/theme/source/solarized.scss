@@ -79,10 +79,12 @@ h1.title:nth-child(2) {
 	font-size: 2.35em !important;
 	font-weight: 100 !important;
 }
+
 .conference {
 	margin-top: 15px !important;
 	padding-left: 5px;
 }
+
 #title-container {
     display: flex;
     flex-direction: column;
@@ -91,6 +93,7 @@ h1.title:nth-child(2) {
     padding: 1em;
     width: 100%;
 }
+
 .delightful-title {
 	animation: text-shadow 1.5s ease-in-out infinite;
 	line-height: 1;
@@ -98,6 +101,18 @@ h1.title:nth-child(2) {
 	font-size: 4em !important;
 	font-family: 'Lato', sans-serif;
 	color: #ffffff !important;
+}
+
+.delightful-bounce {
+	animation: text-shadow 1.5s ease-in-out infinite;
+}
+
+.mango-highlight {
+	color: $mangoYellow;
+}
+
+.white-highlight {
+	color: #ffffff;
 }
 
 @keyframes text-shadow {
@@ -152,4 +167,35 @@ h1.title:nth-child(2) {
       animation: none !important;
       transition: none !important;
     }
+}
+
+.simple-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width:100%;
+}
+
+.gif-sneak-peek {
+	border: 5px solid $base01;
+	background-size: cover;
+	flex-basis:25%;
+	padding:30px;
+}
+
+.client-func-gif {
+	background-image: url("../../../assets/frying-lumpia.gif");
+}
+
+.orchestrator-func-gif {
+	background-image: url("../../../assets/conductor.gif");
+}
+
+.activity-func-gif {
+	background-image: url("../../../assets/unruly-orchestra.gif");
+}
+
+.entity-func-gif {
+	background-image: url("../../../assets/replay.webp");
 }

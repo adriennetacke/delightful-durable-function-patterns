@@ -153,11 +153,10 @@ body {
 .reveal pre {
 	display: block;
 	position: relative;
-	width: 90%;
-	margin: $blockMargin auto;
+	width: 100%;
 
 	text-align: left;
-	font-size: 0.55em;
+	font-size: 0.8em;
 	font-family: $codeFont;
 	line-height: 1.2em;
 
@@ -174,8 +173,8 @@ body {
 .reveal pre code {
 	display: block;
 	padding: 5px;
-	overflow: auto;
-	max-height: 400px;
+	overflow: hidden;
+	max-height: 800px;
 	word-wrap: normal;
 }
 
@@ -314,4 +313,11 @@ body {
     .backgrounds {
         background-color: $backgroundColor;
     }
+}
+
+/*********************************************
+ * SPAN OVERRIDE
+ *********************************************/
+ .reveal span.larger-text {
+    font-size: 80px !important;
 }

@@ -64,7 +64,7 @@ body {
   font-size: 3.77em; }
 
 .reveal h2 {
-  font-size: 2.11em; }
+  font-size: 1.8em; }
 
 .reveal h3 {
   font-size: 1.55em; }
@@ -145,10 +145,9 @@ body {
 .reveal pre {
   display: block;
   position: relative;
-  width: 90%;
-  margin: 2px auto;
+  width: 100%;
   text-align: left;
-  font-size: 0.55em;
+  font-size: 0.8em;
   font-family: monospace;
   line-height: 1.2em;
   word-wrap: break-word;
@@ -161,8 +160,8 @@ body {
 .reveal pre code {
   display: block;
   padding: 5px;
-  overflow: auto;
-  max-height: 400px;
+  overflow: hidden;
+  max-height: 800px;
   word-wrap: normal; }
 
 .reveal table {
@@ -272,6 +271,12 @@ body {
   .backgrounds {
     background-color: #fff8da; } }
 
+/*********************************************
+ * SPAN OVERRIDE
+ *********************************************/
+.reveal span.larger-text {
+  font-size: 80px !important; }
+
 .annotation {
   position: absolute;
   bottom: 2px;
@@ -304,6 +309,15 @@ h1.title:nth-child(2) {
   font-family: 'Lato', sans-serif;
   color: #ffffff !important; }
 
+.delightful-bounce {
+  animation: text-shadow 1.5s ease-in-out infinite; }
+
+.mango-highlight {
+  color: #ffcb2e; }
+
+.white-highlight {
+  color: #ffffff; }
+
 @keyframes text-shadow {
   0% {
     transform: translateY(0);
@@ -325,3 +339,28 @@ h1.title:nth-child(2) {
   * {
     animation: none !important;
     transition: none !important; } }
+
+.simple-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; }
+
+.gif-sneak-peek {
+  border: 5px solid #252525;
+  background-size: cover;
+  flex-basis: 25%;
+  padding: 30px; }
+
+.client-func-gif {
+  background-image: url("../../../assets/frying-lumpia.gif"); }
+
+.orchestrator-func-gif {
+  background-image: url("../../../assets/conductor.gif"); }
+
+.activity-func-gif {
+  background-image: url("../../../assets/unruly-orchestra.gif"); }
+
+.entity-func-gif {
+  background-image: url("../../../assets/replay.webp"); }

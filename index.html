@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="css/theme/solarized.css">
 
 		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/monokai.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -34,9 +34,135 @@
 							<h6 class="conference">NDC London 2020</h6>
 						</div>
 					</section>
-					<section data-background-transition="slide">
+					<section data-transition="fade-in fade-out" data-background-transition="fade-in fade-out">
 						<img src="./assets/azure-functions-logo.png" height="400">
-						<h3>Who has used Azure Functions before?</h3>
+						<h3 class="fragment fade-in-then-out">Who knows what an <span class="mango-highlight">Azure Function</span> is?</h3>
+						<h3 class="fragment fade-in-then-out">Who's created one?</h3>
+					</section>
+					<section data-transition="fade-in fade-out" data-background-transition="fade-in fade-out">
+						<span class="fragment fade-in larger-text">"I just need to do {insert small event-based task here}...</span>
+						<span class="fragment fade-in larger-text">WITHOUT provisioning resources first</span>
+						<span class="fragment fade-in larger-text"> (but can dynamically scale if I need to) </span>
+						<span class="fragment fade-in larger-text">oh, and I only want to pay for the compute resources I use."</span>
+					</section>
+					<section data-transition="fade-in fade-out" data-background-transition="fade-in fade-out">
+						<img src="./assets/azure-functions-logo.png" height="400">
+					</section>
+				</section>
+				<section>
+					<div class="annotation">@adriennetacke</div>
+					<section data-background-transition="slide" data-background-color="#ffcb2e">
+						<h2>So, what are are <span class="white-highlight">Durable Functions</span>?</h2>
+						<aside class="notes">
+						- a library that brings workflow orchestration abstractions to Azure Functions
+						- Durable functions extend Azure Functions.
+						- Fill in the gaps where Azure Functions fall short
+						- Code-first, imperative style of development (Azure Logic Apps are the UI-first equivalent)
+						- Durable Functions manage state, checkpoints, and restarts for you.
+						- Allow you to create stateful workflows (with orchestrator functions) and stateful entities (with entity functions).
+						</aside>
+					</section>
+					<section data-background-transition="slide" data-background-color="#ffcb2e">
+						<h2><span class="white-highlight">Durable Functions</span></h2>
+						<div class="simple-row">
+							<div>{Code-first}</div>
+							<div>Stateful</div>
+							<div>Consolidated</div>
+						</div>
+					</section>
+					<section data-background-transition="slide" data-background-color="#ffcb2e">
+						<h2>How does it do that?</h2>
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row">
+							<div class="gif-sneak-peek">Client</div>
+						</div>
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="../assets/unruly-orchestra.gif" data-background-size="cover">	
+					</section>
+					<section 
+						data-background-color="#252525"
+						data-transition="fade-in-then-out" 
+						data-background-transition="fade-in-then-out">
+						<pre>
+							<code data-line-numbers data-trim data-noescape>
+						[FunctionName("ClientFunction")]
+						public static async Task<IActionResult> ClientFunctionStart(
+							<span class="fragment fade-in" data-fragment-index="1">[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")]HttpRequest req,</span>
+							<span class="fragment fade-in" data-fragment-index="2">[DurableClient]IDurableOrchestrationClient starter,</span>
+							<span class="fragment fade-in" data-fragment-index="3">ILogger log)</span>
+						{
+							<span class="fragment fade-in" data-fragment-index="4">string instanceId = </span>
+								<span class="fragment fade-in" data-fragment-index="4">await starter.StartNewAsync("OrchestrationFunction", null);</span>
+
+							<span class="fragment fade-in" data-fragment-index="5">log.LogInformation($"Started orchestration with ID = '{instanceId}'.");</span>
+
+							<span class="fragment fade-in" data-fragment-index="6">return starter.CreateCheckStatusResponse(req, instanceId);</span>
+						}
+						</code>
+					</pre>
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row">
+							<div class="gif-sneak-peek">Client</div>
+							<div class="fragment fade-in"><h1>➡</h1></div>
+							<div class="gif-sneak-peek fragment fade-in">Orchestrator</div>
+						</div>
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="../assets/conductor.gif" data-background-size="cover">	
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row">
+							<div class="gif-sneak-peek">Client</div>
+							<div class="gif-sneak-peek">Orchestrator</div>
+							<div class="gif-sneak-peek"></div>
+							<div class="gif-sneak-peek"></div>
+						</div>
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row">
+							<div class="gif-sneak-peek">Client</div>
+							<div class="gif-sneak-peek">Orchestrator</div>
+							<div class="gif-sneak-peek">Activity</div>
+							<div class="gif-sneak-peek"></div>
+						</div>
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="../assets/conductor.gif" data-background-size="cover">	
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row">
+							<div class="gif-sneak-peek">Client</div>
+							<div class="gif-sneak-peek">Orchestrator</div>
+							<div class="gif-sneak-peek">Activity</div>
+							<div class="gif-sneak-peek"></div>
+						</div>
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row">
+							<div class="gif-sneak-peek">Client</div>
+							<div class="gif-sneak-peek">Orchestrator</div>
+							<div class="gif-sneak-peek">Activity</div>
+							<div class="gif-sneak-peek">Entity</div>
+						</div>
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="../assets/conductor.gif" data-background-size="cover">	
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row">
+							<div class="fragment fade-in gif-sneak-peek client-func-gif"><span>Client Function</span></div>
+							<div class="fragment fade-in gif-sneak-peek orchestrator-func-gif">Orchestrator Function</div>
+							<div class="fragment fade-in gif-sneak-peek activity-func-gif">Activity Function</div>
+							<div class="fragment fade-in gif-sneak-peek entity-func-gif">Entity Function</div>
+						</div>
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<h2>How does it do that?</h2>
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<h2>How does it do that?</h2>
+					</section>
+					<section data-background-transition="slide" data-background-color="#ffcb2e">
+						<h2>How does it do that?</h2>
 					</section>
 				</section>
 			</div>
