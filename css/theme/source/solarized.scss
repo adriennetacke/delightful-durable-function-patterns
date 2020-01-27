@@ -15,6 +15,7 @@
 @import url(../../lib/font/league-gothic/league-gothic.css);
 @import url(https://fonts.googleapis.com/css?family=Quicksand:400,600);
 @import url(https://fonts.googleapis.com/css?family=Lato:400,600);
+@import url(https://fonts.googleapis.com/css?family=Overpass+Mono:600);
 
 
 /**
@@ -29,7 +30,7 @@ html * {
 $base000: 	#000000;
 $base03:    #002b36;
 $base02:    #073642;
-$base01:    #586e75;
+$base01:    #252525;
 $base00:    #657b83;
 $base0:     #839496;
 $base1:     #93a1a1;
@@ -64,3 +65,91 @@ $selectionBackgroundColor: $magenta;
 // Theme template ------------------------------
 @import "../template/theme";
 // ---------------------------------------------
+
+.annotation {
+	position: absolute;
+	bottom: 2px;
+	color: $base01;
+	font-size: .85em;
+	width: 100%;
+	font-family: 'Overpass Mono', sans-serif;
+}
+
+h1.title:nth-child(2) {
+	font-size: 2.35em !important;
+	font-weight: 100 !important;
+}
+.conference {
+	margin-top: 15px !important;
+	padding-left: 5px;
+}
+#title-container {
+    display: flex;
+    flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+    padding: 1em;
+    width: 100%;
+}
+.delightful-title {
+	animation: text-shadow 1.5s ease-in-out infinite;
+	line-height: 1;
+	margin-bottom: 80px !important;
+	font-size: 4em !important;
+	font-family: 'Lato', sans-serif;
+	color: #ffffff !important;
+}
+
+@keyframes text-shadow {
+    0% {  
+        transform: translateY(0);
+        text-shadow: 
+            0 0 0 #ffa62e, 
+            0 0 0 #ffcb2e, 
+            0 0 0 #ffec2e, 
+            0 0 0 #fefc4b;
+    }
+
+    20% {  
+        transform: translateY(-1em);
+        text-shadow: 
+            0 0.125em 0 #ffa62e, 
+            0 0.25em 0 #ffcb2e, 
+            0 -0.125em 0 #ffec2e, 
+            0 -0.25em 0 #fefc4b;
+    }
+
+    40% {  
+        transform: translateY(0.5em);
+        text-shadow: 
+            0 -0.0625em 0 #ffa62e, 
+            0 -0.125em 0 #ffcb2e, 
+            0 0.0625em 0 #ffec2e, 
+            0 0.125em 0 #fefc4b;
+    }
+    
+   60% {
+        transform: translateY(-0.25em);
+        text-shadow: 
+            0 0.03125em 0 #ffa62e, 
+            0 0.0625em 0 #ffcb2e, 
+            0 -0.03125em 0 #ffec2e, 
+            0 -0.0625em 0 #fefc4b;
+    }
+
+    80% {  
+        transform: translateY(0);
+        text-shadow: 
+            0 0 0 #ffa62e, 
+            0 0 0 #ffcb2e, 
+            0 0 0 #ffec2e, 
+            0 0 0 #fefc4b;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+}

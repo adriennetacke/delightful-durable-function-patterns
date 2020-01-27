@@ -5,6 +5,7 @@
 @import url(../../lib/font/league-gothic/league-gothic.css);
 @import url(https://fonts.googleapis.com/css?family=Quicksand:400,600);
 @import url(https://fonts.googleapis.com/css?family=Lato:400,600);
+@import url(https://fonts.googleapis.com/css?family=Overpass+Mono:600);
 /**
  * Solarized colors by Ethan Schoonover
  */
@@ -50,7 +51,7 @@ body {
 .reveal h5,
 .reveal h6 {
   margin: 0 0 2px 0;
-  color: #586e75;
+  color: #252525;
   font-family: "Quicksand", sans-serif;
   font-weight: 600;
   line-height: 0.9;
@@ -70,13 +71,6 @@ body {
 
 .reveal h4 {
   font-size: 1em; }
-
-.reveal h1 {
-  text-shadow: 0pc 0px 3px #ffcb2e; }
-
-.reveal h1.title {
-  color: #ffcb2e;
-  text-shadow: 10px 5px 3px #94720f; }
 
 /*********************************************
  * OTHER
@@ -277,3 +271,57 @@ body {
 @media print {
   .backgrounds {
     background-color: #fff8da; } }
+
+.annotation {
+  position: absolute;
+  bottom: 2px;
+  color: #252525;
+  font-size: .85em;
+  width: 100%;
+  font-family: 'Overpass Mono', sans-serif; }
+
+h1.title:nth-child(2) {
+  font-size: 2.35em !important;
+  font-weight: 100 !important; }
+
+.conference {
+  margin-top: 15px !important;
+  padding-left: 5px; }
+
+#title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1em;
+  width: 100%; }
+
+.delightful-title {
+  animation: text-shadow 1.5s ease-in-out infinite;
+  line-height: 1;
+  margin-bottom: 80px !important;
+  font-size: 4em !important;
+  font-family: 'Lato', sans-serif;
+  color: #ffffff !important; }
+
+@keyframes text-shadow {
+  0% {
+    transform: translateY(0);
+    text-shadow: 0 0 0 #ffa62e,  0 0 0 #ffcb2e,  0 0 0 #ffec2e,  0 0 0 #fefc4b; }
+  20% {
+    transform: translateY(-1em);
+    text-shadow: 0 0.125em 0 #ffa62e,  0 0.25em 0 #ffcb2e,  0 -0.125em 0 #ffec2e,  0 -0.25em 0 #fefc4b; }
+  40% {
+    transform: translateY(0.5em);
+    text-shadow: 0 -0.0625em 0 #ffa62e,  0 -0.125em 0 #ffcb2e,  0 0.0625em 0 #ffec2e,  0 0.125em 0 #fefc4b; }
+  60% {
+    transform: translateY(-0.25em);
+    text-shadow: 0 0.03125em 0 #ffa62e,  0 0.0625em 0 #ffcb2e,  0 -0.03125em 0 #ffec2e,  0 -0.0625em 0 #fefc4b; }
+  80% {
+    transform: translateY(0);
+    text-shadow: 0 0 0 #ffa62e,  0 0 0 #ffcb2e,  0 0 0 #ffec2e,  0 0 0 #fefc4b; } }
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important; } }
