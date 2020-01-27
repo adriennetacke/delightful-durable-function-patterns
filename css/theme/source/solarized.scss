@@ -26,6 +26,7 @@ html * {
 }
 
 // Solarized colors
+$base000: 	#000000;
 $base03:    #002b36;
 $base02:    #073642;
 $base01:    #586e75;
@@ -34,6 +35,7 @@ $base0:     #839496;
 $base1:     #93a1a1;
 $base2:     #eee8d5;
 $base3:     #fdf6e3;
+$backgroundBase: #fff8da;
 $yellow:    #b58900;
 $orange:    #cb4b16;
 $red:       #dc322f;
@@ -44,10 +46,10 @@ $cyan:      #2aa198;
 $green:     #859900;
 
 // Override theme settings (see ../template/settings.scss)
-$mainColor: $base00;
+$mainColor: $base000;
 $headingColor: $base01;
 $headingTextShadow: none;
-$backgroundColor: $base3;
+$backgroundColor: $backgroundBase;
 $linkColor: $blue;
 $linkColorHover: lighten( $linkColor, 20% );
 $selectionBackgroundColor: $magenta;
