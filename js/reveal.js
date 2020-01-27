@@ -148,7 +148,7 @@
 			// If you're on slide 1.3 and navigate right, you will normally move
 			// from 1.3 -> 2.1. If "grid" is used, the same navigation takes you
 			// from 1.3 -> 2.3.
-			navigationMode: 'default',
+			navigationMode: 'linear',
 
 			// Randomizes the order of slides each time the presentation loads
 			shuffle: false,
@@ -1478,6 +1478,7 @@
 
 		window.addEventListener( 'hashchange', onWindowHashChange, false );
 		window.addEventListener( 'resize', onWindowResize, false );
+		window.addEventListener( 'DOMContentLoaded', escapeHTML, false);
 
 		if( config.touch ) {
 			if( 'onpointerdown' in window ) {
@@ -5632,6 +5633,25 @@
 	function onWindowHashChange( event ) {
 
 		readURL();
+
+	}
+	/**
+	 * Handler for the document level 'escapeHTML' event.
+	 *
+	 * @param {object} [event]
+	 */
+	function escapeHTML( event ) {
+
+		var cblocks = document.querySelectorAll("pre code");
+				
+		if(cblocks.length) {
+			for(var i=0, len=cblocks.length; i<len; i++) {
+				var dom = cblocks[i];
+				var html = dom.innerHTML;
+				html = html.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+				dom.innerHTML = html;
+			}
+		}
 
 	}
 

@@ -70,7 +70,7 @@
 							<div>Consolidated</div>
 						</div>
 					</section>
-					<section data-background-transition="slide" data-background-color="#ffcb2e">
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
 						<h2>How does it do that?</h2>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
@@ -110,49 +110,78 @@
 						</div>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="../assets/conductor.gif" data-background-size="cover">	
+					</section>	
+					<section 
+						data-background-color="#252525"
+						data-transition="fade-in-then-out" 
+						data-background-transition="fade-in-then-out">
+						<pre style="font-size: .7em;">
+							<code data-line-numbers data-trim data-noescape>
+							[FunctionName("Orchestrator")]
+							public static async Task<List<string>> RunOrchestration(
+								<span class="fragment fade-in" data-fragment-index="1">[OrchestratorTrigger]IDurableOrchestrationContext context,</span>
+								<span class="fragment fade-in" data-fragment-index="2">ILogger log)</span>
+							{
+								<span class="fragment fade-in" data-fragment-index="4">var outputs = List<string>();</span>
+
+								<span class="fragment fade-in" data-fragment-index="5">outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Proper Etiquette");</span>
+								<span class="fragment fade-in" data-fragment-index="5">outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Your Majesty");</span>
+								<span class="fragment fade-in" data-fragment-index="5">outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "London");</span>
+
+								<span class="fragment fade-in" data-fragment-index="6">log.LogInformation($"COMPLETE: Orchestration Function and subsequent tasks. Results:");</span>
+
+								<span class="fragment fade-in" data-fragment-index="7">for (string output in outputs)</span>
+								<span class="fragment fade-in" data-fragment-index="7">{</span>
+									<span class="fragment fade-in" data-fragment-index="7">log.LogInformation(output);</span>
+								<span class="fragment fade-in" data-fragment-index="7">}</span>
+							}
+							</code>
+						</pre>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
 						<div class="simple-row">
 							<div class="gif-sneak-peek">Client</div>
+							<div><h1>➡</h1></div>
 							<div class="gif-sneak-peek">Orchestrator</div>
-							<div class="gif-sneak-peek"></div>
-							<div class="gif-sneak-peek"></div>
+							<div class="fragment fade-in"><h1>➡</h1></div>
+							<div class="gif-sneak-peek fragment fade-in">Activity</div>
 						</div>
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="../assets/replay.webp" data-background-size="cover">	
+					</section>
+					<section 
+						data-background-color="#252525"
+						data-transition="fade-in-then-out" 
+						data-background-transition="fade-in-then-out">
+						<pre>
+							<code data-line-numbers data-trim data-noescape>
+							[FunctionName("ActivityFunction")]
+							public static async Task<List<string>> SayHello(<span class="fragment fade-in" data-fragment-index="1">[ActivityTrigger] string name, ILogger log)</span>
+							{
+								<span class="fragment fade-in" data-fragment-index="2">log.LogInformation($"Saying hello to {name}");</span>
+								<span class="fragment fade-in" data-fragment-index="3">return $"Kumusta {name}!";</span>
+							}
+							</code>
+						</pre>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
 						<div class="simple-row">
 							<div class="gif-sneak-peek">Client</div>
 							<div class="gif-sneak-peek">Orchestrator</div>
 							<div class="gif-sneak-peek">Activity</div>
-							<div class="gif-sneak-peek"></div>
+						</div>
+						<div class="simple-row fragment fade-in">
+							<div class="gif-sneak-peek new-gif-sneak-peek">Entity</div>
 						</div>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="../assets/conductor.gif" data-background-size="cover">	
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
 						<div class="simple-row">
-							<div class="gif-sneak-peek">Client</div>
-							<div class="gif-sneak-peek">Orchestrator</div>
-							<div class="gif-sneak-peek">Activity</div>
-							<div class="gif-sneak-peek"></div>
-						</div>
-					</section>
-					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
-						<div class="simple-row">
-							<div class="gif-sneak-peek">Client</div>
-							<div class="gif-sneak-peek">Orchestrator</div>
-							<div class="gif-sneak-peek">Activity</div>
-							<div class="gif-sneak-peek">Entity</div>
-						</div>
-					</section>
-					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="../assets/conductor.gif" data-background-size="cover">	
-					</section>
-					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
-						<div class="simple-row">
-							<div class="fragment fade-in gif-sneak-peek client-func-gif"><span>Client Function</span></div>
-							<div class="fragment fade-in gif-sneak-peek orchestrator-func-gif">Orchestrator Function</div>
-							<div class="fragment fade-in gif-sneak-peek activity-func-gif">Activity Function</div>
-							<div class="fragment fade-in gif-sneak-peek entity-func-gif">Entity Function</div>
+							<div class="fragment fade-in gif-sneak-peek client-func-gif"><span>Client</span></div>
+							<div class="fragment fade-in gif-sneak-peek orchestrator-func-gif">Orchestrator</div>
+							<div class="fragment fade-in gif-sneak-peek activity-func-gif">Activity</div>
+							<div class="fragment fade-in gif-sneak-peek entity-func-gif">Entity</div>
 						</div>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
@@ -180,6 +209,7 @@
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/highlight/highlight.js' },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
 					{ src: 'plugin/notes/notes.js', async: true }
 				]
 			});

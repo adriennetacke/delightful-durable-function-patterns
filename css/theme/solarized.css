@@ -146,6 +146,7 @@ body {
   display: block;
   position: relative;
   width: 100%;
+  max-height: 95%;
   text-align: left;
   font-size: 0.8em;
   font-family: monospace;
@@ -161,7 +162,7 @@ body {
   display: block;
   padding: 5px;
   overflow: hidden;
-  max-height: 800px;
+  max-height: 95%;
   word-wrap: normal; }
 
 .reveal table {
@@ -352,6 +353,10 @@ h1.title:nth-child(2) {
   background-size: cover;
   flex-basis: 25%;
   padding: 30px; }
+
+.new-gif-sneak-peek {
+  border: 5px solid #cb4b16;
+  color: #cb4b16; }
 
 .client-func-gif {
   background-image: url("../../../assets/frying-lumpia.gif"); }
