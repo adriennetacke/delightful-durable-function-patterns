@@ -287,6 +287,13 @@ body {
   width: 100%;
   font-family: 'Overpass Mono', sans-serif; }
 
+.annotation {
+  position: absolute;
+  top: 2px;
+  color: #252525;
+  font-size: .75em;
+  width: 100%; }
+
 h1.title:nth-child(2) {
   font-size: 2.35em !important;
   font-weight: 100 !important; }
@@ -355,14 +362,21 @@ h1.title:nth-child(2) {
   justify-content: space-between; }
 
 .gif-sneak-peek {
-  border: 5px solid #252525;
+  border: 10px solid #252525;
   background-size: cover;
   flex-basis: 25%;
-  padding: 30px; }
+  padding: 30px;
+  font-weight: 600 !important; }
 
 .new-gif-sneak-peek {
-  border: 5px solid #ffffff;
-  color: #cb4b16; }
+  border: 10px solid #ffffff;
+  color: #ffffff;
+  font-weight: 600 !important; }
+
+.func-type-summary .client-func-gif,
+.func-type-summary .orchestrator-func-gif,
+.func-type-summary .activity-func-gif {
+  color: #ffffff !important; }
 
 .client-func-gif {
   background-image: url("../../../assets/frying-lumpia.gif"); }

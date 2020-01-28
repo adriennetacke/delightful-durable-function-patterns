@@ -25,6 +25,7 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
+				<!--Title-->
 				<section>
 					<div class="annotation">@adriennetacke</div>
 					<section data-transition="slide" data-transition="fast" data-background-color="#ffcb2e" data-background-transition="slide" data-transition-speed="slow">
@@ -34,9 +35,10 @@
 							<h6 class="conference">NDC London 2020</h6>
 						</div>
 					</section>
+					<!-- Begin Azure Functions -->
 					<section data-transition="fade-in fade-out" data-background-transition="fade-in fade-out">
 						<img src="./assets/azure-functions-logo.png" height="400">
-						<h3 class="fragment fade-in-then-out">Who knows what an <span class="mango-highlight">Azure Function</span> is?</h3>
+						<h3 class="fragment fade-in-then-out">Who's familiar with <span class="mango-highlight">Azure Functions</span>?</h3>
 						<h3 class="fragment fade-in-then-out">Who's created one?</h3>
 					</section>
 					<section data-transition="fade-in fade-out" data-background-transition="fade-in fade-out">
@@ -49,13 +51,13 @@
 						<img src="./assets/azure-functions-logo.png" height="400">
 					</section>
 				</section>
+				<!--What are Durable Functions?-->
 				<section>
 					<div class="annotation">@adriennetacke</div>
 					<section data-background-transition="slide" data-background-color="#ffcb2e">
 						<h2>So, what are are <span class="white-highlight">Durable Functions</span>?</h2>
 						<aside class="notes">
-						- a library that brings workflow orchestration abstractions to Azure Functions
-						- Durable functions extend Azure Functions.
+						- a library that extends Azure Functions by bringing workflow orchestration abstractions
 						- Fill in the gaps where Azure Functions fall short
 						- Code-first, imperative style of development (Azure Logic Apps are the UI-first equivalent)
 						- Durable Functions manage state, checkpoints, and restarts for you.
@@ -74,34 +76,132 @@
 						<h2>How does it do that?</h2>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<h2></h2>
+					</section>
+					<!--Client Function-->
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
 						<div class="simple-row space-between">
 							<div class="gif-sneak-peek">Client</div>
 						</div>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="../assets/unruly-orchestra.gif" data-background-size="cover">	
+					<aside class="notes" data-markdown>
+					- "Entry-point" function; the Client function kickstarts a new orchestration instance
+					- Just like a regular function EXCEPT it has super special DurableClient output binding
+					- DurableClient binding:
+						- Allows us to trigger Orchestrator/Entity functions
+						- Allows us to interact with running orchestrations/entities
+					</aside>
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#252525" data-background-image="../assets/client-function.png" data-background-size="contain">
+					</section>
+					<!-- <section 
+						data-background-color="#252525"
+						data-transition="fade-in-then-out" 
+						data-background-transition="fade-in-then-out">
+						<pre>
+							<code data-line-numbers data-trim>
+							[FunctionName("ClientFunction")]
+								public static async Task<IActionResult> ClientFunctionStart(
+								[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")]HttpRequest req,
+								[DurableClient]IDurableOrchestrationClient starter,
+								ILogger log)
+							{
+								string instanceId = 
+									await starter.StartNewAsync("OrchestrationFunction", null);
+
+								log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
+
+								return starter.CreateCheckStatusResponse(req, instanceId);
+							}
+							</code>
+						</pre>
 					</section>
 					<section 
 						data-background-color="#252525"
 						data-transition="fade-in-then-out" 
 						data-background-transition="fade-in-then-out">
 						<pre>
-							<code data-line-numbers data-trim data-noescape>
-						[FunctionName("ClientFunction")]
-						public static async Task<IActionResult> ClientFunctionStart(
-							<span class="fragment fade-in" data-fragment-index="1">[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")]HttpRequest req,</span>
-							<span class="fragment fade-in" data-fragment-index="2">[DurableClient]IDurableOrchestrationClient starter,</span>
-							<span class="fragment fade-in" data-fragment-index="3">ILogger log)</span>
-						{
-							<span class="fragment fade-in" data-fragment-index="4">string instanceId = </span>
-								<span class="fragment fade-in" data-fragment-index="4">await starter.StartNewAsync("OrchestrationFunction", null);</span>
+							<code data-line-numbers="3" data-trim>
+							[FunctionName("ClientFunction")]
+							public static async Task<IActionResult> ClientFunctionStart(
+								[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")]HttpRequest req,
+								[DurableClient]IDurableOrchestrationClient starter,
+								ILogger log)
+							{
+								string instanceId = await starter.StartNewAsync("OrchestrationFunction", null);
 
-							<span class="fragment fade-in" data-fragment-index="5">log.LogInformation($"Started orchestration with ID = '{instanceId}'.");</span>
+								log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
 
-							<span class="fragment fade-in" data-fragment-index="6">return starter.CreateCheckStatusResponse(req, instanceId);</span>
-						}
-						</code>
-					</pre>
+								return starter.CreateCheckStatusResponse(req, instanceId);
+							}
+							</code>
+						</pre>
 					</section>
+					<section 
+						data-background-color="#252525"
+						data-transition="fade-in-then-out" 
+						data-background-transition="fade-in-then-out">
+						<pre>
+							<code data-line-numbers="4" data-trim>
+							[FunctionName("ClientFunction")]
+							public static async Task<IActionResult> ClientFunctionStart(
+								[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")]HttpRequest req,
+								[DurableClient]IDurableOrchestrationClient starter,
+								ILogger log)
+							{
+								string instanceId = await starter.StartNewAsync("OrchestrationFunction", null);
+
+								log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
+
+								return starter.CreateCheckStatusResponse(req, instanceId);
+							}
+							</code>
+						</pre>
+					</section>
+					<section 
+						data-background-color="#252525"
+						data-transition="fade-in-then-out" 
+						data-background-transition="fade-in-then-out">
+						<pre>
+							<code data-line-numbers="7" data-trim>
+							[FunctionName("ClientFunction")]
+							public static async Task<IActionResult> ClientFunctionStart(
+								[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")]HttpRequest req,
+								[DurableClient]IDurableOrchestrationClient starter,
+								ILogger log)
+							{
+								string instanceId = await starter.StartNewAsync("OrchestrationFunction", null);
+
+								log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
+
+								return starter.CreateCheckStatusResponse(req, instanceId);
+							}
+							</code>
+						</pre>
+					</section>
+					<section 
+						data-background-color="#252525"
+						data-transition="fade-in-then-out" 
+						data-background-transition="fade-in-then-out">
+						<pre>
+							<code data-line-numbers="11" data-trim>
+							[FunctionName("ClientFunction")]
+							public static async Task<IActionResult> ClientFunctionStart(
+								[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")]HttpRequest req,
+								[DurableClient]IDurableOrchestrationClient starter,
+								ILogger log)
+							{
+								string instanceId = await starter.StartNewAsync("OrchestrationFunction", null);
+
+								log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
+
+								return starter.CreateCheckStatusResponse(req, instanceId);
+							}
+							</code>
+						</pre>
+					</section> -->
+					<!--Orchestrator Function-->
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
 						<div class="simple-row space-between">
 							<div class="gif-sneak-peek">Client</div>
@@ -110,8 +210,14 @@
 						</div>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="../assets/conductor.gif" data-background-size="cover">	
+					<aside class="notes" data-markdown>
+					- Just as name implies, the Orchestrator function manages the execution flow and data among several activity functions.
+					- It's here that you define the order of steps, how to handle errors/exceptions
+					</aside>
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#252525" data-background-image="../assets/orchestration-function.png" data-background-size="contain">	
 					</section>	
-					<section 
+					<!-- <section 
 						data-background-color="#252525"
 						data-transition="fade-in-then-out" 
 						data-background-transition="fade-in-then-out">
@@ -119,25 +225,108 @@
 							<code data-line-numbers data-trim>
 							[FunctionName("Orchestrator")]
 							public static async Task<List<string>> RunOrchestration(
-								<span class="fragment fade-in" data-fragment-index="1">[OrchestratorTrigger]IDurableOrchestrationContext context,</span>
-								<span class="fragment fade-in" data-fragment-index="2">ILogger log)</span>
+								[OrchestratorTrigger]IDurableOrchestrationContext context,
+								ILogger log)
 							{
-								<span class="fragment fade-in" data-fragment-index="4">var outputs = List<string>();</span>
+								var outputs = List<string>();
 
-								<span class="fragment fade-in" data-fragment-index="5">outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Proper Etiquette");</span>
-								<span class="fragment fade-in" data-fragment-index="5">outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Your Majesty");</span>
-								<span class="fragment fade-in" data-fragment-index="5">outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "London");</span>
+								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Proper Etiquette");
+								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Your Majesty");
+								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "London");
 
-								<span class="fragment fade-in" data-fragment-index="6">log.LogInformation($"COMPLETE: Orchestration Function and subsequent tasks. Results:");</span>
+								log.LogInformation($"COMPLETE: Orchestration Function and subsequent tasks. Results:");
 
-								<span class="fragment fade-in" data-fragment-index="7">for (string output in outputs)</span>
-								<span class="fragment fade-in" data-fragment-index="7">{</span>
-									<span class="fragment fade-in" data-fragment-index="7">log.LogInformation(output);</span>
-								<span class="fragment fade-in" data-fragment-index="7">}</span>
+								for (string output in outputs)
+								{
+									log.LogInformation(output);
+								}
 							}
 							</code>
 						</pre>
 					</section>
+					<section 
+						data-background-color="#252525"
+						data-transition="fade-in-then-out" 
+						data-background-transition="fade-in-then-out">
+						<pre style="font-size: .7em;">
+							<code data-line-numbers="3" data-trim>
+							[FunctionName("Orchestrator")]
+							public static async Task<List<string>> RunOrchestration(
+								[OrchestratorTrigger]IDurableOrchestrationContext context,
+								ILogger log)
+							{
+								var outputs = List<string>();
+
+								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Proper Etiquette");
+								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Your Majesty");
+								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "London");
+
+								log.LogInformation($"COMPLETE: Orchestration Function and subsequent tasks. Results:");
+
+								for (string output in outputs)
+								{
+									log.LogInformation(output);
+								}
+							}
+							</code>
+						</pre>
+					</section>
+					<section 
+						data-background-color="#252525"
+						data-transition="fade-in-then-out" 
+						data-background-transition="fade-in-then-out">
+						<pre style="font-size: .7em;">
+							<code data-line-numbers="8-10" data-trim>
+							[FunctionName("Orchestrator")]
+							public static async Task<List<string>> RunOrchestration(
+								[OrchestratorTrigger]IDurableOrchestrationContext context,
+								ILogger log)
+							{
+								var outputs = List<string>();
+
+								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Proper Etiquette");
+								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Your Majesty");
+								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "London");
+
+								log.LogInformation($"COMPLETE: Orchestration Function and subsequent tasks. Results:");
+
+								for (string output in outputs)
+								{
+									log.LogInformation(output);
+								}
+							}
+							</code>
+						</pre>
+					</section>
+					<section 
+						data-background-color="#252525"
+						data-transition="fade-in-then-out" 
+						data-background-transition="fade-in-then-out">
+						<pre style="font-size: .7em;">
+							<code data-line-numbers="8-10" data-trim>
+							[FunctionName("Orchestrator")]
+							public static async Task<List<string>> RunOrchestration(
+								[OrchestratorTrigger]IDurableOrchestrationContext context,
+								ILogger log)
+							{
+								var outputs = List<string>();
+
+								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Proper Etiquette");
+								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Your Majesty");
+								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "London");
+
+								log.LogInformation($"COMPLETE: Orchestration Function and subsequent tasks. Results:");
+
+								for (string output in outputs)
+								{
+									log.LogInformation(output);
+								};
+								return outputs;
+							}
+							</code>
+						</pre>
+					</section> -->
+					<!--Activity Function-->
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
 						<div class="simple-row space-between">
 							<div class="gif-sneak-peek">Client</div>
@@ -148,15 +337,27 @@
 						</div>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="../assets/replay.webp" data-background-size="cover">	
+						<aside class="notes" data-markdown>
+							- Just like a regular function BUT can only be triggered by ActivityTrigger
+							- Can accept input parameter from Orchestrator function
+							- These are the single-responsibility tasks
+								- Calculate things
+								- Get information from external sources
+							- Final result is returned to Orchestrator function (can be further processed)
+						</aside>
 					</section>
-					<section 
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#252525" data-background-image="../assets/activity-function.png" data-background-size="contain">	
+					</section>
+					<!-- <section 
 						data-background-color="#252525"
 						data-transition="fade-in-then-out" 
 						data-background-transition="fade-in-then-out">
 						<pre>
 							<code data-line-numbers data-trim>
 							[FunctionName("ActivityFunction")]
-							public static async Task<List<string>> SayHello([ActivityTrigger] string name, ILogger log)
+							public static async Task<List<string>> SayHello(
+								[ActivityTrigger] string name, 
+								ILogger log)
 							{
 								log.LogInformation($"Saying hello to {name}");
 								return $"Kumusta {name}!";
@@ -169,24 +370,11 @@
 						data-transition="fade-in-then-out" 
 						data-background-transition="fade-in-then-out">
 						<pre>
-							<code data-line-numbers data-trim>
+							<code data-line-numbers="3" data-trim>
 							[FunctionName("ActivityFunction")]
-							public static async Task<List<string>> SayHello([ActivityTrigger] string name, ILogger log)
-							{
-								log.LogInformation($"Saying hello to {name}");
-								return $"Kumusta {name}!";
-							}
-							</code>
-						</pre>
-					</section>
-					<section 
-						data-background-color="#252525"
-						data-transition="fade-in-then-out" 
-						data-background-transition="fade-in-then-out">
-						<pre>
-							<code data-line-numbers data-trim>
-							[FunctionName("ActivityFunction")]
-							public static async Task<List<string>> SayHello([ActivityTrigger] string name, ILogger log)
+							public static async Task<List<string>> SayHello(
+								[ActivityTrigger] string name, 
+								ILogger log)
 							{
 								log.LogInformation($"Saying hello to {name}");
 								return $"Kumusta {name}!";
@@ -208,36 +396,54 @@
 							}
 							</code>
 						</pre>
-					</section>
+					</section> -->
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
-						<div class="simple-row space-between">
-							<div class="gif-sneak-peek">Client</div>
-							<div class="gif-sneak-peek">Orchestrator</div>
-							<div class="gif-sneak-peek">Activity</div>
-						</div>
-						<div class="simple-row centered fragment fade-in">
-							<div class="gif-sneak-peek new-gif-sneak-peek">Entity</div>
-						</div>
-					</section>
-					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="../assets/conductor.gif" data-background-size="cover">	
-					</section>
-					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
-						<div class="simple-row space-between">
-							<div class="fragment fade-in gif-sneak-peek client-func-gif"><span>Client</span></div>
+						<div class="simple-row space-between func-type-summary">
+							<div class="fragment fade-in gif-sneak-peek client-func-gif">Client</div>
 							<div class="fragment fade-in gif-sneak-peek orchestrator-func-gif">Orchestrator</div>
 							<div class="fragment fade-in gif-sneak-peek activity-func-gif">Activity</div>
-							<div class="fragment fade-in gif-sneak-peek entity-func-gif">Entity</div>
 						</div>
+						<div class="simple-row centered fragment fade-in" style="margin-top: 30px;">
+							<div class="gif-sneak-peek new-gif-sneak-peek">Entity</div>
+						</div>
+						<aside class="notes" data-markdown>
+						- Used to define operations for reading and updating small pieces of state
+						- Can only be triggered by EntityTrigger
+						- Manages state explicitly
+						- No code constraints like Orchestrator functions (deterministic)
+						</aside>
 					</section>
-					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
-						<h2>How does it do that?</h2>
-					</section>
-					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
-						<h2>How does it do that?</h2>
-					</section>
-					<section data-background-transition="slide" data-background-color="#ffcb2e">
-						<h2>How does it do that?</h2>
-					</section>
+				</section>	
+				<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+					<h2>What's happening under the hood?</h2>
+					<div class="annotation">@adriennetacke</div>
+				</section>
+				<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+					<div class="topic-annontation">What's happening under the hood?</div>
+					<div class="simple-row space-between">
+						<div class="gif-sneak-peek fragment fade-in">Orchestrator</div>
+						<div class="fragment fade-in">➡ Queue ✉</div>
+						<div class="gif-sneak-peek fragment fade-in">Activity</div>
+					</div>
+					<div class="annotation">@adriennetacke</div>
+				</section>
+				<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+					<div class="topic-annontation">What's happening under the hood?</div>
+					<h2>Orchestrator stops!</h2>
+					<h4 class="fragment fade-in">(Meanwhile, Activity Function does it's thing...)</h4>
+					<div class="annotation">@adriennetacke</div>
+				</section>
+				<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+					<div class="topic-annontation">What's happening under the hood?</div>
+					<div class="simple-row space-between">
+						<div class="gif-sneak-peek fragment fade-in">Activity</div>
+						<div class="fragment fade-in">➡ Queue ✉ (result)</div>
+						<div class="gif-sneak-peek fragment fade-in">Orchestrator</div>
+					</div>
+					<div class="annotation">@adriennetacke</div>
+				</section>
+				<section data-transition="slide" data-background-transition="slide" 
+				data-background-video="./assets/wakeup.mp4" data-background-video-loop>
 				</section>
 			</div>
 		</div>

@@ -75,6 +75,14 @@ $selectionBackgroundColor: $magenta;
 	font-family: 'Overpass Mono', sans-serif;
 }
 
+.annotation {
+	position: absolute;
+	top: 2px;
+	color: $base01;
+	font-size: .75em;
+	width: 100%;
+}
+
 h1.title:nth-child(2) {
 	font-size: 2.35em !important;
 	font-weight: 100 !important;
@@ -185,15 +193,25 @@ h1.title:nth-child(2) {
 }
 
 .gif-sneak-peek {
-	border: 5px solid $base01;
+	border: 10px solid $base01;
 	background-size: cover;
 	flex-basis:25%;
 	padding:30px;
+	font-weight: 600 !important;
 }
 
 .new-gif-sneak-peek {
-	border: 5px solid #ffffff;
-	color: $orange;
+	border: 10px solid #ffffff;
+	color: #ffffff;
+	font-weight: 600 !important;
+}
+
+.func-type-summary {
+	.client-func-gif,
+	.orchestrator-func-gif,
+	.activity-func-gif {
+		color: #ffffff !important;
+	}
 }
 
 .client-func-gif {
