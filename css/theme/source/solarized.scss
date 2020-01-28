@@ -172,9 +172,16 @@ h1.title:nth-child(2) {
 .simple-row {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
 	align-items: center;
 	width:100%;
+}
+
+.centered {
+	justify-content: center;
+}
+
+.space-between {
+	justify-content: space-between;
 }
 
 .gif-sneak-peek {
@@ -185,7 +192,7 @@ h1.title:nth-child(2) {
 }
 
 .new-gif-sneak-peek {
-	border: 5px solid $orange;
+	border: 5px solid #ffffff;
 	color: $orange;
 }
 

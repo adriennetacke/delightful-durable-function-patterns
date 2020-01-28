@@ -64,7 +64,7 @@
 					</section>
 					<section data-background-transition="slide" data-background-color="#ffcb2e">
 						<h2><span class="white-highlight">Durable Functions</span></h2>
-						<div class="simple-row">
+						<div class="simple-row space-between">
 							<div>{Code-first}</div>
 							<div>Stateful</div>
 							<div>Consolidated</div>
@@ -74,7 +74,7 @@
 						<h2>How does it do that?</h2>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
-						<div class="simple-row">
+						<div class="simple-row space-between">
 							<div class="gif-sneak-peek">Client</div>
 						</div>
 					</section>
@@ -103,7 +103,7 @@
 					</pre>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
-						<div class="simple-row">
+						<div class="simple-row space-between">
 							<div class="gif-sneak-peek">Client</div>
 							<div class="fragment fade-in"><h1>➡</h1></div>
 							<div class="gif-sneak-peek fragment fade-in">Orchestrator</div>
@@ -116,7 +116,7 @@
 						data-transition="fade-in-then-out" 
 						data-background-transition="fade-in-then-out">
 						<pre style="font-size: .7em;">
-							<code data-line-numbers data-trim data-noescape>
+							<code data-line-numbers data-trim>
 							[FunctionName("Orchestrator")]
 							public static async Task<List<string>> RunOrchestration(
 								<span class="fragment fade-in" data-fragment-index="1">[OrchestratorTrigger]IDurableOrchestrationContext context,</span>
@@ -139,7 +139,7 @@
 						</pre>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
-						<div class="simple-row">
+						<div class="simple-row space-between">
 							<div class="gif-sneak-peek">Client</div>
 							<div><h1>➡</h1></div>
 							<div class="gif-sneak-peek">Orchestrator</div>
@@ -154,30 +154,75 @@
 						data-transition="fade-in-then-out" 
 						data-background-transition="fade-in-then-out">
 						<pre>
-							<code data-line-numbers data-trim data-noescape>
+							<code data-line-numbers data-trim>
 							[FunctionName("ActivityFunction")]
-							public static async Task<List<string>> SayHello(<span class="fragment fade-in" data-fragment-index="1">[ActivityTrigger] string name, ILogger log)</span>
+							public static async Task<List<string>> SayHello([ActivityTrigger] string name, ILogger log)
 							{
-								<span class="fragment fade-in" data-fragment-index="2">log.LogInformation($"Saying hello to {name}");</span>
-								<span class="fragment fade-in" data-fragment-index="3">return $"Kumusta {name}!";</span>
+								log.LogInformation($"Saying hello to {name}");
+								return $"Kumusta {name}!";
+							}
+							</code>
+						</pre>
+					</section>
+					<section 
+						data-background-color="#252525"
+						data-transition="fade-in-then-out" 
+						data-background-transition="fade-in-then-out">
+						<pre>
+							<code data-line-numbers data-trim>
+							[FunctionName("ActivityFunction")]
+							public static async Task<List<string>> SayHello([ActivityTrigger] string name, ILogger log)
+							{
+								log.LogInformation($"Saying hello to {name}");
+								return $"Kumusta {name}!";
+							}
+							</code>
+						</pre>
+					</section>
+					<section 
+						data-background-color="#252525"
+						data-transition="fade-in-then-out" 
+						data-background-transition="fade-in-then-out">
+						<pre>
+							<code data-line-numbers data-trim>
+							[FunctionName("ActivityFunction")]
+							public static async Task<List<string>> SayHello([ActivityTrigger] string name, ILogger log)
+							{
+								log.LogInformation($"Saying hello to {name}");
+								return $"Kumusta {name}!";
+							}
+							</code>
+						</pre>
+					</section>
+					<section 
+						data-background-color="#252525"
+						data-transition="fade-in-then-out" 
+						data-background-transition="fade-in-then-out">
+						<pre>
+							<code data-line-numbers="5" data-trim>
+							[FunctionName("ActivityFunction")]
+							public static async Task<List<string>> SayHello([ActivityTrigger] string name, ILogger log)
+							{
+								log.LogInformation($"Saying hello to {name}");
+								return $"Kumusta {name}!";
 							}
 							</code>
 						</pre>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
-						<div class="simple-row">
+						<div class="simple-row space-between">
 							<div class="gif-sneak-peek">Client</div>
 							<div class="gif-sneak-peek">Orchestrator</div>
 							<div class="gif-sneak-peek">Activity</div>
 						</div>
-						<div class="simple-row fragment fade-in">
+						<div class="simple-row centered fragment fade-in">
 							<div class="gif-sneak-peek new-gif-sneak-peek">Entity</div>
 						</div>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="../assets/conductor.gif" data-background-size="cover">	
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
-						<div class="simple-row">
+						<div class="simple-row space-between">
 							<div class="fragment fade-in gif-sneak-peek client-func-gif"><span>Client</span></div>
 							<div class="fragment fade-in gif-sneak-peek orchestrator-func-gif">Orchestrator</div>
 							<div class="fragment fade-in gif-sneak-peek activity-func-gif">Activity</div>

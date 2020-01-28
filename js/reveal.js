@@ -1478,7 +1478,6 @@
 
 		window.addEventListener( 'hashchange', onWindowHashChange, false );
 		window.addEventListener( 'resize', onWindowResize, false );
-		window.addEventListener( 'DOMContentLoaded', escapeHTML, false);
 
 		if( config.touch ) {
 			if( 'onpointerdown' in window ) {
@@ -5635,26 +5634,7 @@
 		readURL();
 
 	}
-	/**
-	 * Handler for the document level 'escapeHTML' event.
-	 *
-	 * @param {object} [event]
-	 */
-	function escapeHTML( event ) {
-
-		var cblocks = document.querySelectorAll("pre code");
-				
-		if(cblocks.length) {
-			for(var i=0, len=cblocks.length; i<len; i++) {
-				var dom = cblocks[i];
-				var html = dom.innerHTML;
-				html = html.replace(/</g,"&lt;").replace(/>/g,"&gt;");
-				dom.innerHTML = html;
-			}
-		}
-
-	}
-
+	
 	/**
 	 * Handler for the window level 'resize' event.
 	 *
