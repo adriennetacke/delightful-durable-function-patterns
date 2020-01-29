@@ -356,13 +356,6 @@ h1.title:nth-child(2) {
   align-items: center;
   width: 100%; }
 
-.right-column {
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  align-items: left;
-  width: 100%; }
-
 .centered {
   justify-content: center; }
 
@@ -421,11 +414,11 @@ h1.title:nth-child(2) {
   background-position: center; }
 
 .push-button-gif {
-  background-image: url("../../../assets/monitor-pattern.gif");
-  background-size: contain;
+  background-image: url("../../../assets/push-button.gif");
+  background-size: cover;
   background-position: center; }
 
-.push-button-gif {
+.aggregator-gif {
   background-image: url("../../../assets/data-flow.gif");
   background-size: cover;
   background-position: center; }

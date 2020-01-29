@@ -193,7 +193,7 @@
 							<div class="gif-sneak-peek fragment fade-in">Orchestrator</div>
 						</div>
 					</section>
-					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-video="./assets/wakeup.mp4" data-background-video-loop>
+					<section data-background-video="./assets/wakeup.mp4" data-background-video-loop>
 					</section>
 					<section data-transition="slide" data-background-transition="slide">
 						<div class="gif-sneak-peek simple-row space-between">
@@ -210,32 +210,22 @@
 						- Moves onto second activity 
 						</aside>
 					</section>
-					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/replay.webp">
-					</section>
 				</section>
 				<!--Deterministic Orchestrators-->
 				<section>
+					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/replay.webp">
+					</section>
 					<div class="annotation">@adriennetacke</div>
 					<section data-transition="slide" data-background-transition="slide">
 						<h1><span class="mango-highlight">Deterministic</span> Orchestrators</h1>
-						<h3 class="fragment fade-in" style="margin-top: 30px;">TL;DR Put that code in an Activity Function</h3>
+						<h3 class="fragment fade-in" style="margin-top: 30px;">(in a single meme)</h3>
 					</section>
 					<aside class="notes" data-markdown>
 					- No matter when or how often our Orchestration Function is called, the **_same_** result must be returned each time given the same input.
 					- TL;DR Put it in an Activity Function!
 					</aside>
 				</section>
-				<section>
-					<div class="annotation">@adriennetacke</div>
-					<div class="topic-annotation"><span class="mango-highlight">Deterministic</span>Orchestrators</div>
-					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/babyyoda-drakememe-template.jpg">
-						<div class="right-column">
-							<div>DateTime.Now</div>
-							<div>Random numbers, GUIDs</div>
-							<div>Multithreading</div>
-							<div>Async APIs</div>
-						</div>
-					</section>
+				<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/deterministic-foundling.jpg" data-background-size="contain">
 				</section>
 				<!--Why Durable Functions?-->
 				<section>
@@ -339,6 +329,8 @@
 							<div class="fragment fade-in gif-sneak-peek lumpia-process-gif-contain" data-fragment-index="4">Tita Andy</div>
 						</div>
 					</section>
+					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/frying-lumpia.gif" data-background-size="cover">
+					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
 						<div class="simple-row space-between">
 							<div class="gif-sneak-peek white-background lumpia-process-gif">Function Chaining</div>
@@ -413,11 +405,8 @@
 						<h2><span class="white-highlight">Monitor</span> pattern</h2>
 						<h3 class="fragment fade-in" style="margin-top: 30px;">Mirror of Async HTTP API. Orchestration polls a service at regular intervals.</h3>
 					</section>
-					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/monitor-pattern.gif">
-					</section>
 					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
 						<h2>Grandmother asks where grandchildren are.</h2>
-						<h3 style="margin-top: 30px;">Demo</h3>
 						<aside class="notes" data-markdown>
 						- orchestration polls some service at regular intervals. 
 						</aside>
@@ -489,6 +478,18 @@
 						</aside>
 					</section>
 					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/data-flow.gif">
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row space-between">
+							<div class="gif-sneak-peek white-background lumpia-process-gif">Function Chaining</div>
+							<div class="gif-sneak-peek white-background lumpia-process-gif-contain">Fan Out/Fan In</div>
+							<div class="gif-sneak-peek white-background waiting-gif">Async HTTP API</div>
+						</div>
+						<div class="simple-row space-between" style="margin-top: 50px;">
+							<div class="gif-sneak-peek white-background monitor-pattern-gif">Monitor</div>
+							<div class="gif-sneak-peek white-background push-button-gif">Human Interaction</div>
+							<div class="gif-sneak-peek white-background aggregator-gif">Aggregator</div>
+						</div>
 					</section>
 				</section>
 				<section data-transition="slide" data-transition="fast" data-background-color="#ffcb2e" data-background-transition="slide" data-transition-speed="slow">
