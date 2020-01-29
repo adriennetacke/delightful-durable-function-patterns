@@ -46,6 +46,12 @@
 						<span class="fragment fade-in larger-text">WITHOUT provisioning resources first</span>
 						<span class="fragment fade-in larger-text"> (but can dynamically scale if I need to) </span>
 						<span class="fragment fade-in larger-text">oh, and I only want to pay for the compute resources I use."</span>
+						<aside class="notes" data-markdown>
+							- Small pieces of code or functionality invoked by events
+							- Don't need full-blown infrastructure to run this action
+							- Sprint planning or conversing with colleagues, several candidates for functions came to mind?
+							- Have exactly one trigger to kickstart function
+						</aside>
 					</section>
 					<section data-transition="fade-in fade-out" data-background-transition="fade-in fade-out">
 						<img src="./assets/azure-functions-logo.png" height="400">
@@ -54,29 +60,38 @@
 				<!--What are Durable Functions?-->
 				<section>
 					<div class="annotation">@adriennetacke</div>
-					<section data-background-transition="slide" data-background-color="#ffcb2e">
-						<h2>So, what are are <span class="white-highlight">Durable Functions</span>?</h2>
+					<section data-background-transition="fade-in-then-out" data-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<h2>So, what are <span class="white-highlight">Durable Functions</span>?</h2>
 						<aside class="notes">
 						- a library that extends Azure Functions by bringing workflow orchestration abstractions
 						- Fill in the gaps where Azure Functions fall short
-						- Code-first, imperative style of development (Azure Logic Apps are the UI-first equivalent)
-						- Durable Functions manage state, checkpoints, and restarts for you.
 						- Allow you to create stateful workflows (with orchestrator functions) and stateful entities (with entity functions).
 						</aside>
 					</section>
-					<section data-background-transition="slide" data-background-color="#ffcb2e">
+				</section>
+				<section>
+					<div class="annotation">@adriennetacke</div>
+					<div class="topic-annotation">So, what are <span class="white-highlight">Durable Functions</span>?</div>
+					<section data-background-transition="fade-in-then-out" data-transition="fade-in-then-out" data-background-color="#ffcb2e">
 						<h2><span class="white-highlight">Durable Functions</span></h2>
-						<div class="simple-row space-between">
-							<div>{Code-first}</div>
-							<div>Stateful</div>
-							<div>Consolidated</div>
+						<div class="simple-row space-between" style="margin-top: 50px;">
+							<div class="gif-sneak-peek fragment fade-in">{Code-first}</div>
+							<div class="gif-sneak-peek fragment fade-in">Stateful</div class="gif-sneak-peek">
+							<div class="gif-sneak-peek fragment fade-in">Consolidated</div class="gif-sneak-peek">
 						</div>
+						<aside class="notes" data-markdown>
+							- Code-first, imperative style of development (Azure Logic Apps are the UI-first equivalent)
+							- Durable Functions manage state, checkpoints, and restarts for you.
+						</aside>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
 						<h2>How does it do that?</h2>
 					</section>
+				</section>
+				<section>
+					<div class="annotation">@adriennetacke</div>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
-						<h2></h2>
+						<h2>Function Types</h2>
 					</section>
 					<!--Client Function-->
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
@@ -84,7 +99,7 @@
 							<div class="gif-sneak-peek">Client</div>
 						</div>
 					</section>
-					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="../assets/unruly-orchestra.gif" data-background-size="cover">	
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="../assets/ipod-press-play.gif" data-background-size="cover">	
 					<aside class="notes" data-markdown>
 					- "Entry-point" function; the Client function kickstarts a new orchestration instance
 					- Just like a regular function EXCEPT it has super special DurableClient output binding
@@ -95,112 +110,6 @@
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#252525" data-background-image="../assets/client-function.png" data-background-size="contain">
 					</section>
-					<!-- <section 
-						data-background-color="#252525"
-						data-transition="fade-in-then-out" 
-						data-background-transition="fade-in-then-out">
-						<pre>
-							<code data-line-numbers data-trim>
-							[FunctionName("ClientFunction")]
-								public static async Task<IActionResult> ClientFunctionStart(
-								[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")]HttpRequest req,
-								[DurableClient]IDurableOrchestrationClient starter,
-								ILogger log)
-							{
-								string instanceId = 
-									await starter.StartNewAsync("OrchestrationFunction", null);
-
-								log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
-
-								return starter.CreateCheckStatusResponse(req, instanceId);
-							}
-							</code>
-						</pre>
-					</section>
-					<section 
-						data-background-color="#252525"
-						data-transition="fade-in-then-out" 
-						data-background-transition="fade-in-then-out">
-						<pre>
-							<code data-line-numbers="3" data-trim>
-							[FunctionName("ClientFunction")]
-							public static async Task<IActionResult> ClientFunctionStart(
-								[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")]HttpRequest req,
-								[DurableClient]IDurableOrchestrationClient starter,
-								ILogger log)
-							{
-								string instanceId = await starter.StartNewAsync("OrchestrationFunction", null);
-
-								log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
-
-								return starter.CreateCheckStatusResponse(req, instanceId);
-							}
-							</code>
-						</pre>
-					</section>
-					<section 
-						data-background-color="#252525"
-						data-transition="fade-in-then-out" 
-						data-background-transition="fade-in-then-out">
-						<pre>
-							<code data-line-numbers="4" data-trim>
-							[FunctionName("ClientFunction")]
-							public static async Task<IActionResult> ClientFunctionStart(
-								[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")]HttpRequest req,
-								[DurableClient]IDurableOrchestrationClient starter,
-								ILogger log)
-							{
-								string instanceId = await starter.StartNewAsync("OrchestrationFunction", null);
-
-								log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
-
-								return starter.CreateCheckStatusResponse(req, instanceId);
-							}
-							</code>
-						</pre>
-					</section>
-					<section 
-						data-background-color="#252525"
-						data-transition="fade-in-then-out" 
-						data-background-transition="fade-in-then-out">
-						<pre>
-							<code data-line-numbers="7" data-trim>
-							[FunctionName("ClientFunction")]
-							public static async Task<IActionResult> ClientFunctionStart(
-								[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")]HttpRequest req,
-								[DurableClient]IDurableOrchestrationClient starter,
-								ILogger log)
-							{
-								string instanceId = await starter.StartNewAsync("OrchestrationFunction", null);
-
-								log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
-
-								return starter.CreateCheckStatusResponse(req, instanceId);
-							}
-							</code>
-						</pre>
-					</section>
-					<section 
-						data-background-color="#252525"
-						data-transition="fade-in-then-out" 
-						data-background-transition="fade-in-then-out">
-						<pre>
-							<code data-line-numbers="11" data-trim>
-							[FunctionName("ClientFunction")]
-							public static async Task<IActionResult> ClientFunctionStart(
-								[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")]HttpRequest req,
-								[DurableClient]IDurableOrchestrationClient starter,
-								ILogger log)
-							{
-								string instanceId = await starter.StartNewAsync("OrchestrationFunction", null);
-
-								log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
-
-								return starter.CreateCheckStatusResponse(req, instanceId);
-							}
-							</code>
-						</pre>
-					</section> -->
 					<!--Orchestrator Function-->
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
 						<div class="simple-row space-between">
@@ -217,115 +126,6 @@
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#252525" data-background-image="../assets/orchestration-function.png" data-background-size="contain">	
 					</section>	
-					<!-- <section 
-						data-background-color="#252525"
-						data-transition="fade-in-then-out" 
-						data-background-transition="fade-in-then-out">
-						<pre style="font-size: .7em;">
-							<code data-line-numbers data-trim>
-							[FunctionName("Orchestrator")]
-							public static async Task<List<string>> RunOrchestration(
-								[OrchestratorTrigger]IDurableOrchestrationContext context,
-								ILogger log)
-							{
-								var outputs = List<string>();
-
-								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Proper Etiquette");
-								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Your Majesty");
-								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "London");
-
-								log.LogInformation($"COMPLETE: Orchestration Function and subsequent tasks. Results:");
-
-								for (string output in outputs)
-								{
-									log.LogInformation(output);
-								}
-							}
-							</code>
-						</pre>
-					</section>
-					<section 
-						data-background-color="#252525"
-						data-transition="fade-in-then-out" 
-						data-background-transition="fade-in-then-out">
-						<pre style="font-size: .7em;">
-							<code data-line-numbers="3" data-trim>
-							[FunctionName("Orchestrator")]
-							public static async Task<List<string>> RunOrchestration(
-								[OrchestratorTrigger]IDurableOrchestrationContext context,
-								ILogger log)
-							{
-								var outputs = List<string>();
-
-								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Proper Etiquette");
-								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Your Majesty");
-								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "London");
-
-								log.LogInformation($"COMPLETE: Orchestration Function and subsequent tasks. Results:");
-
-								for (string output in outputs)
-								{
-									log.LogInformation(output);
-								}
-							}
-							</code>
-						</pre>
-					</section>
-					<section 
-						data-background-color="#252525"
-						data-transition="fade-in-then-out" 
-						data-background-transition="fade-in-then-out">
-						<pre style="font-size: .7em;">
-							<code data-line-numbers="8-10" data-trim>
-							[FunctionName("Orchestrator")]
-							public static async Task<List<string>> RunOrchestration(
-								[OrchestratorTrigger]IDurableOrchestrationContext context,
-								ILogger log)
-							{
-								var outputs = List<string>();
-
-								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Proper Etiquette");
-								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Your Majesty");
-								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "London");
-
-								log.LogInformation($"COMPLETE: Orchestration Function and subsequent tasks. Results:");
-
-								for (string output in outputs)
-								{
-									log.LogInformation(output);
-								}
-							}
-							</code>
-						</pre>
-					</section>
-					<section 
-						data-background-color="#252525"
-						data-transition="fade-in-then-out" 
-						data-background-transition="fade-in-then-out">
-						<pre style="font-size: .7em;">
-							<code data-line-numbers="8-10" data-trim>
-							[FunctionName("Orchestrator")]
-							public static async Task<List<string>> RunOrchestration(
-								[OrchestratorTrigger]IDurableOrchestrationContext context,
-								ILogger log)
-							{
-								var outputs = List<string>();
-
-								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Proper Etiquette");
-								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "Your Majesty");
-								outputs.Add(await context.CallActivityAsync<string>("ActivityFunction", "London");
-
-								log.LogInformation($"COMPLETE: Orchestration Function and subsequent tasks. Results:");
-
-								for (string output in outputs)
-								{
-									log.LogInformation(output);
-								};
-								return outputs;
-							}
-							</code>
-						</pre>
-					</section> -->
 					<!--Activity Function-->
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
 						<div class="simple-row space-between">
@@ -336,7 +136,7 @@
 							<div class="gif-sneak-peek fragment fade-in">Activity</div>
 						</div>
 					</section>
-					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="../assets/replay.webp" data-background-size="cover">	
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="../assets/unruly-orchestra.gif" data-background-size="cover">	
 						<aside class="notes" data-markdown>
 							- Just like a regular function BUT can only be triggered by ActivityTrigger
 							- Can accept input parameter from Orchestrator function
@@ -348,55 +148,6 @@
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#252525" data-background-image="../assets/activity-function.png" data-background-size="contain">	
 					</section>
-					<!-- <section 
-						data-background-color="#252525"
-						data-transition="fade-in-then-out" 
-						data-background-transition="fade-in-then-out">
-						<pre>
-							<code data-line-numbers data-trim>
-							[FunctionName("ActivityFunction")]
-							public static async Task<List<string>> SayHello(
-								[ActivityTrigger] string name, 
-								ILogger log)
-							{
-								log.LogInformation($"Saying hello to {name}");
-								return $"Kumusta {name}!";
-							}
-							</code>
-						</pre>
-					</section>
-					<section 
-						data-background-color="#252525"
-						data-transition="fade-in-then-out" 
-						data-background-transition="fade-in-then-out">
-						<pre>
-							<code data-line-numbers="3" data-trim>
-							[FunctionName("ActivityFunction")]
-							public static async Task<List<string>> SayHello(
-								[ActivityTrigger] string name, 
-								ILogger log)
-							{
-								log.LogInformation($"Saying hello to {name}");
-								return $"Kumusta {name}!";
-							}
-							</code>
-						</pre>
-					</section>
-					<section 
-						data-background-color="#252525"
-						data-transition="fade-in-then-out" 
-						data-background-transition="fade-in-then-out">
-						<pre>
-							<code data-line-numbers="5" data-trim>
-							[FunctionName("ActivityFunction")]
-							public static async Task<List<string>> SayHello([ActivityTrigger] string name, ILogger log)
-							{
-								log.LogInformation($"Saying hello to {name}");
-								return $"Kumusta {name}!";
-							}
-							</code>
-						</pre>
-					</section> -->
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
 						<div class="simple-row space-between func-type-summary">
 							<div class="fragment fade-in gif-sneak-peek client-func-gif">Client</div>
@@ -410,40 +161,341 @@
 						- Used to define operations for reading and updating small pieces of state
 						- Can only be triggered by EntityTrigger
 						- Manages state explicitly
-						- No code constraints like Orchestrator functions (deterministic)
+						- Chris [Gillum]. Software engineering manager for Azure Functions team at Microsoft
 						</aside>
 					</section>
 				</section>	
-				<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
-					<h2>What's happening under the hood?</h2>
+				<!--What's happening under the hood?-->
+				<section>
 					<div class="annotation">@adriennetacke</div>
+					<section data-transition="slide" data-background-transition="slide">
+						<h2>What's happening <span class="mango-highlight">under the hood</span>?</h2>
+					</section>
 				</section>
-				<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
-					<div class="topic-annontation">What's happening under the hood?</div>
-					<div class="simple-row space-between">
-						<div class="gif-sneak-peek fragment fade-in">Orchestrator</div>
-						<div class="fragment fade-in">➡ Queue ✉</div>
-						<div class="gif-sneak-peek fragment fade-in">Activity</div>
+				<section>
+					<div class="annotation">@adriennetacke</div>
+					<div class="topic-annotation">What's happening <span class="mango-highlight">under the hood</span>?</div>
+					<section data-transition="slide" data-background-transition="slide">
+						<div class="simple-row space-between">
+							<div class="gif-sneak-peek fragment fade-in">Orchestrator</div>
+							<div class="fragment fade-in">➡ Queue ✉</div>
+							<div class="gif-sneak-peek fragment fade-in">Activity</div>
+						</div>
+					</section>
+					<section data-transition="slide" data-background-transition="slide">
+						<h2>Orchestrator <span class="mango-highlight">stops</span>!</h2>
+						<h3 class="fragment fade-in" style="margin-top: 30px;">(Meanwhile, Activity Function does it's job...)</h3>
+					</section>
+					<section data-transition="slide" data-background-transition="slide">
+						<div class="simple-row space-between">
+							<div class="gif-sneak-peek fragment fade-in">Activity</div>
+							<div class="fragment fade-in">➡ Queue ✉ (result)</div>
+							<div class="gif-sneak-peek fragment fade-in">Orchestrator</div>
+						</div>
+					</section>
+					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-video="./assets/wakeup.mp4" data-background-video-loop>
+					</section>
+					<section data-transition="slide" data-background-transition="slide">
+						<div class="gif-sneak-peek simple-row space-between">
+							<div class="gif-sneak-peek fragment fade-in">Result is stored</div>
+							<div class="gif-sneak-peek fragment fade-in">🔄 Reloads history</div>
+							<div class="gif-sneak-peek fragment fade-in">Decides</div>
+						</div>
+						<aside class="notes" data-markdown>
+						- Orchestrator restarts from first line
+						- Result is now in first variable
+						- Orchestrator loads complete history of this particular execution from storage
+						- Decides whether to call first activity or return previously stored result
+						- Won't send Queue ✉ to activity one again as first variable has result
+						- Moves onto second activity 
+						</aside>
+					</section>
+					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/replay.webp">
+					</section>
+				</section>
+				<!--Deterministic Orchestrators-->
+				<section>
+					<div class="annotation">@adriennetacke</div>
+					<section data-transition="slide" data-background-transition="slide">
+						<h1><span class="mango-highlight">Deterministic</span> Orchestrators</h1>
+						<h3 class="fragment fade-in" style="margin-top: 30px;">TL;DR Put that code in an Activity Function</h3>
+					</section>
+					<aside class="notes" data-markdown>
+					- No matter when or how often our Orchestration Function is called, the **_same_** result must be returned each time given the same input.
+					- TL;DR Put it in an Activity Function!
+					</aside>
+				</section>
+				<section>
+					<div class="annotation">@adriennetacke</div>
+					<div class="topic-annotation"><span class="mango-highlight">Deterministic</span>Orchestrators</div>
+					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/babyyoda-drakememe-template.jpg">
+						<div class="right-column">
+							<div>DateTime.Now</div>
+							<div>Random numbers, GUIDs</div>
+							<div>Multithreading</div>
+							<div>Async APIs</div>
+						</div>
+					</section>
+				</section>
+				<!--Why Durable Functions?-->
+				<section>
+					<div class="annotation">@adriennetacke</div>
+					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+						<h1><span class="white-highlight">Why</span> Durable Functions?</h1>
+					</section>
+				</section>
+				<section>
+					<div class="annotation">@adriennetacke</div>
+					<div class="topic-annotation"><span class="white-highlight">Why</span> Durable Functions?</div>
+					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+						<h1>Simpler</h1>
+					</section>
+					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+						<h1>Stateful</h1>
+					</section>
+					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+						<h1>Scalable</h1>
+					</section>
+				</section>
+				<!--Patterns-->
+				<section>
+					<div class="annotation">@adriennetacke</div>
+					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+						<h1>Durable Function <span class="white-highlight">Patterns</span></h1>
+					</section>
+				</section>
+				<section>
+					<div class="annotation">@adriennetacke</div>
+					<div class="topic-annotation">Durable Function <span class="white-highlight">Patterns</span></div>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row space-between">
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+						</div>
+						<div class="simple-row space-between" style="margin-top: 50px;">
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+						</div>
+					</section>
+					<!--Function Chaining Pattern-->
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row space-between">
+							<div class="gif-sneak-peek white-background">Function Chaining</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+						</div>
+						<div class="simple-row space-between" style="margin-top: 50px;">
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+						</div>
+					</section>
+					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+						<h2><span class="white-highlight">Function Chaining</span> pattern</h2>
+						<h3 class="fragment fade-in" style="margin-top: 30px;">Sequential; Output of one is Input of another (sound familiar?)</h3>
+					</section>
+					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/lumpia-process.webp" data-background-size="cover">
+					</section>
+					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/frying-lumpia.gif" data-background-size="cover">
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row space-between">
+							<div class="gif-sneak-peek white-background lumpia-process-gif">Function Chaining</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+						</div>
+						<div class="simple-row space-between" style="margin-top: 50px;">
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+						</div>
+					</section>
+					<!--Fan Out/Fan In Pattern-->
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row space-between">
+							<div class="gif-sneak-peek white-background lumpia-process-gif">Function Chaining</div>
+							<div class="gif-sneak-peek white-background">Fan Out/Fan In</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+						</div>
+						<div class="simple-row space-between" style="margin-top: 50px;">
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+						</div>
+					</section>
+					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+						<h2><span class="white-highlight">Fan Out/Fan In</span> pattern</h2>
+						<h3 class="fragment fade-in" style="margin-top: 30px;">Multiple functions executed in parallel, then combined</h3>
+					</section>
+					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+						<div class="simple-row space-between func-type-summary">
+							<div class="fragment fade-in gif-sneak-peek lumpia-process-gif-contain" data-fragment-index="3">Tita Angelique</div>
+							<div class="fragment fade-in gif-sneak-peek lumpia-process-gif-contain" data-fragment-index="2">Tita Marivic</div>
+						</div>
+						<div class="simple-row space-between func-type-summary" style="margin-top: 30px;">
+							<div class="fragment fade-in gif-sneak-peek lumpia-process-gif-contain" data-fragment-index="1">Tita Sheryl</div>
+							<div class="fragment fade-in gif-sneak-peek lumpia-process-gif-contain" data-fragment-index="4">Tita Andy</div>
+						</div>
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row space-between">
+							<div class="gif-sneak-peek white-background lumpia-process-gif">Function Chaining</div>
+							<div class="gif-sneak-peek white-background lumpia-process-gif-contain">Fan Out/Fan In</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+						</div>
+						<div class="simple-row space-between" style="margin-top: 50px;">
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+						</div>
+					</section>
+					<!--Async HTTP API Pattern-->
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row space-between">
+							<div class="gif-sneak-peek white-background lumpia-process-gif">Function Chaining</div>
+							<div class="gif-sneak-peek white-background lumpia-process-gif-contain">Fan Out/Fan In</div>
+							<div class="gif-sneak-peek white-background">Async HTTP API</div>
+						</div>
+						<div class="simple-row space-between" style="margin-top: 50px;">
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+						</div>
+					</section>
+					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+						<h2><span class="white-highlight">Async HTTP API</span> pattern</h2>
+						<h3 class="fragment fade-in" style="margin-top: 50px;">Also known as Polling Consumer pattern. When client calls HTTP API, 202 result and URLs to check status are returned</h3>
+					</section>
+					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/waiting.webp" data-background-size="cover">
+					</section>
+					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+						<h2>Asking my mom to go to a party in high school.</h2>
+						<h3 style="margin-top: 30px;">Demo</h3>
+						<aside class="notes" data-markdown>
+						Problems when implemented with regular functions:
+						- Need to handle interactions with long-running executions
+
+						How Durable Function makes it better:
+						- Built-in support
+						- Webhook HTTP APIs exposed for you
+						- It takes care of querying the orchestrator function status
+						- Also manages state, so you don't have to keep track of statuses
+						</aside>
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row space-between">
+							<div class="gif-sneak-peek white-background lumpia-process-gif">Function Chaining</div>
+							<div class="gif-sneak-peek white-background lumpia-process-gif-contain">Fan Out/Fan In</div>
+							<div class="gif-sneak-peek white-background waiting-gif">Async HTTP API</div>
+						</div>
+						<div class="simple-row space-between" style="margin-top: 50px;">
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+						</div>
+					</section>
+					<!--Monitor Pattern-->
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row space-between">
+							<div class="gif-sneak-peek white-background lumpia-process-gif">Function Chaining</div>
+							<div class="gif-sneak-peek white-background lumpia-process-gif-contain">Fan Out/Fan In</div>
+							<div class="gif-sneak-peek white-background waiting-gif">Async HTTP API</div>
+						</div>
+						<div class="simple-row space-between" style="margin-top: 50px;">
+							<div class="gif-sneak-peek white-background">Monitor</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+						</div>
+					</section>
+					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+						<h2><span class="white-highlight">Monitor</span> pattern</h2>
+						<h3 class="fragment fade-in" style="margin-top: 30px;">Mirror of Async HTTP API. Orchestration polls a service at regular intervals.</h3>
+					</section>
+					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/monitor-pattern.gif">
+					</section>
+					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+						<h2>Grandmother asks where grandchildren are.</h2>
+						<h3 style="margin-top: 30px;">Demo</h3>
+						<aside class="notes" data-markdown>
+						- orchestration polls some service at regular intervals. 
+						</aside>
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row space-between">
+							<div class="gif-sneak-peek white-background lumpia-process-gif">Function Chaining</div>
+							<div class="gif-sneak-peek white-background lumpia-process-gif-contain">Fan Out/Fan In</div>
+							<div class="gif-sneak-peek white-background waiting-gif">Async HTTP API</div>
+						</div>
+						<div class="simple-row space-between" style="margin-top: 50px;">
+							<div class="gif-sneak-peek white-background monitor-pattern-gif">Monitor</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+						</div>
+					</section>
+					<!--Human Interaction Pattern-->
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row space-between">
+							<div class="gif-sneak-peek white-background lumpia-process-gif">Function Chaining</div>
+							<div class="gif-sneak-peek white-background lumpia-process-gif-contain">Fan Out/Fan In</div>
+							<div class="gif-sneak-peek white-background waiting-gif">Async HTTP API</div>
+						</div>
+						<div class="simple-row space-between" style="margin-top: 50px;">
+							<div class="gif-sneak-peek white-background monitor-pattern-gif">Monitor</div>
+							<div class="gif-sneak-peek white-background">Human Interaction</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+						</div>
+					</section>
+					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+						<h2><span class="white-highlight">Human Interaction</span> pattern</h2>
+						<h3 class="fragment fade-in" style="margin-top: 30px;">Some workflows need human intervention (shocking!). Next steps require human interaction (or lack thereof).</h3>
+					</section>
+					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/push-button.gif" data-background-size="contain">
+					</section>
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row space-between">
+							<div class="gif-sneak-peek white-background lumpia-process-gif">Function Chaining</div>
+							<div class="gif-sneak-peek white-background lumpia-process-gif-contain">Fan Out/Fan In</div>
+							<div class="gif-sneak-peek white-background waiting-gif">Async HTTP API</div>
+						</div>
+						<div class="simple-row space-between" style="margin-top: 50px;">
+							<div class="gif-sneak-peek white-background monitor-pattern-gif">Monitor</div>
+							<div class="gif-sneak-peek white-background push-button-gif">Human Interaction</div>
+							<div class="gif-sneak-peek white-background">🤔</div>
+						</div>
+					</section>
+					<!--Aggregator Pattern-->
+					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<div class="simple-row space-between">
+							<div class="gif-sneak-peek white-background lumpia-process-gif">Function Chaining</div>
+							<div class="gif-sneak-peek white-background lumpia-process-gif-contain">Fan Out/Fan In</div>
+							<div class="gif-sneak-peek white-background waiting-gif">Async HTTP API</div>
+						</div>
+						<div class="simple-row space-between" style="margin-top: 50px;">
+							<div class="gif-sneak-peek white-background monitor-pattern-gif">Monitor</div>
+							<div class="gif-sneak-peek white-background push-button-gif">Human Interaction</div>
+							<div class="gif-sneak-peek white-background">Aggregator</div>
+						</div>
+					</section>
+					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
+						<h2><span class="white-highlight">Aggregator</span> pattern</h2>
+						<h3 class="fragment fade-in" style="margin-top: 30px;">Collecting data over various sources and time periods into a single entity.</h3>
+						<aside class="notes" data-markdown>
+							- Delivered in batches
+							- Scattered over long-periods of time. 
+							- The aggregator might need to take action on event data as it arrives
+							- External clients may need to query the aggregated data.
+						</aside>
+					</section>
+					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/data-flow.gif">
+					</section>
+				</section>
+				<section data-transition="slide" data-transition="fast" data-background-color="#ffcb2e" data-background-transition="slide" data-transition-speed="slow">
+					<div id="title-container">
+						<h1 class="delightful-title title" style="font-size: 5em!important;">Thank You NDC London!</h1>
+						<div class="annotation" style= "font-size: 2em !important; margin-top:120px;">@adriennetacke</div>
 					</div>
-					<div class="annotation">@adriennetacke</div>
-				</section>
-				<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
-					<div class="topic-annontation">What's happening under the hood?</div>
-					<h2>Orchestrator stops!</h2>
-					<h4 class="fragment fade-in">(Meanwhile, Activity Function does it's thing...)</h4>
-					<div class="annotation">@adriennetacke</div>
-				</section>
-				<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
-					<div class="topic-annontation">What's happening under the hood?</div>
-					<div class="simple-row space-between">
-						<div class="gif-sneak-peek fragment fade-in">Activity</div>
-						<div class="fragment fade-in">➡ Queue ✉ (result)</div>
-						<div class="gif-sneak-peek fragment fade-in">Orchestrator</div>
-					</div>
-					<div class="annotation">@adriennetacke</div>
-				</section>
-				<section data-transition="slide" data-background-transition="slide" 
-				data-background-video="./assets/wakeup.mp4" data-background-video-loop>
 				</section>
 			</div>
 		</div>
