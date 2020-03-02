@@ -300,7 +300,7 @@ h1.title:nth-child(2) {
   font-weight: 100 !important; }
 
 .conference {
-  margin-top: 15px !important;
+  margin-top: 35px !important;
   padding-left: 5px; }
 
 #title-container {
@@ -321,6 +321,16 @@ h1.title:nth-child(2) {
 
 .delightful-bounce {
   animation: text-shadow 1.5s ease-in-out infinite; }
+
+#job-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-top: 30px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: .85em;
+  width: 100%; }
 
 .mango-highlight {
   color: #ffcb2e; }
@@ -361,6 +371,9 @@ h1.title:nth-child(2) {
 
 .space-between {
   justify-content: space-between; }
+
+.function-type-title {
+  margin-bottom: 80px !important; }
 
 .gif-sneak-peek {
   border: 10px solid #252525;

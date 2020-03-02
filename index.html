@@ -28,11 +28,22 @@
 				<!--Title-->
 				<section>
 					<div class="annotation">@adriennetacke</div>
-					<section data-transition="slide" data-transition="fast" data-background-color="#ffcb2e" data-background-transition="slide" data-transition-speed="slow">
+					<section 
+						data-transition="slide" 
+						data-transition="fast"
+						data-background-color="#ffcb2e" 
+						data-background-transition="slide" 
+						data-transition-speed="slow">
+						
 						<div id="title-container">
 							<h1 class="delightful-title title">Delightful</h1>
 							<h1 class="title">Durable Function Patterns</h1>
-							<h6 class="conference">NDC London 2020</h6>
+							<img src="./assets/BASTA-logo-white.png" class="conference" width="500px"/>
+							<div id="job-container">
+								<p>Adrienne Tacke </p>
+								<p>Senior Developer Advocate </p>
+								<img src="./assets/mongo-logo-black.svg" width="250px"/>
+							</div>
 						</div>
 					</section>
 					<!-- Begin Azure Functions -->
@@ -47,9 +58,9 @@
 						<span class="fragment fade-in larger-text"> (but can dynamically scale if I need to) </span>
 						<span class="fragment fade-in larger-text">oh, and I only want to pay for the compute resources I use."</span>
 						<aside class="notes" data-markdown>
+							- Sprint planning or conversing with colleagues, several candidates for functions came to mind?
 							- Small pieces of code or functionality invoked by events
 							- Don't need full-blown infrastructure to run this action
-							- Sprint planning or conversing with colleagues, several candidates for functions came to mind?
 							- Have exactly one trigger to kickstart function
 						</aside>
 					</section>
@@ -62,7 +73,7 @@
 					<div class="annotation">@adriennetacke</div>
 					<section data-background-transition="fade-in-then-out" data-transition="fade-in-then-out" data-background-color="#ffcb2e">
 						<h2>So, what are <span class="white-highlight">Durable Functions</span>?</h2>
-						<aside class="notes">
+						<aside class="notes" data-markdown>
 						- a library that extends Azure Functions by bringing workflow orchestration abstractions
 						- Fill in the gaps where Azure Functions fall short
 						- Allow you to create stateful workflows (with orchestrator functions) and stateful entities (with entity functions).
@@ -90,44 +101,40 @@
 				</section>
 				<section>
 					<div class="annotation">@adriennetacke</div>
-					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
-						<h2>Function Types</h2>
-					</section>
 					<!--Client Function-->
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<h2 class="function-type-title">Function Types</h2>
 						<div class="simple-row space-between">
-							<div class="gif-sneak-peek">Client</div>
+							<div class="gif-sneak-peek fragment fade-in">Client</div>
 						</div>
+						<aside class="notes" data-markdown>
+							- "Entry-point" function; the Client function kickstarts a new orchestration instance
+							- Just like a regular function EXCEPT it has super special DurableClient output binding
+							- DurableClient binding:
+								- Allows us to trigger Orchestrator/Entity functions
+								- Allows us to interact with running orchestrations/entities
+							</aside>
 					</section>
-					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="./assets/ipod-press-play.gif" data-background-size="cover">	
-					<aside class="notes" data-markdown>
-					- "Entry-point" function; the Client function kickstarts a new orchestration instance
-					- Just like a regular function EXCEPT it has super special DurableClient output binding
-					- DurableClient binding:
-						- Allows us to trigger Orchestrator/Entity functions
-						- Allows us to interact with running orchestrations/entities
-					</aside>
-					</section>
-					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#252525" data-background-image="./assets/client-function.png" data-background-size="contain">
-					</section>
+
 					<!--Orchestrator Function-->
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<h2 class="function-type-title">Function Types</h2>
 						<div class="simple-row space-between">
 							<div class="gif-sneak-peek">Client</div>
 							<div class="fragment fade-in"><h1>➡</h1></div>
 							<div class="gif-sneak-peek fragment fade-in">Orchestrator</div>
 						</div>
+						<aside class="notes" data-markdown>
+						- Just as name implies, the Orchestrator function manages the execution flow and data among several activity functions.
+						- It's here that you define the order of steps, how to handle errors/exceptions
+						</aside>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="./assets/conductor.gif" data-background-size="cover">	
-					<aside class="notes" data-markdown>
-					- Just as name implies, the Orchestrator function manages the execution flow and data among several activity functions.
-					- It's here that you define the order of steps, how to handle errors/exceptions
-					</aside>
 					</section>
-					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#252525" data-background-image="./assets/orchestration-function.png" data-background-size="contain">	
-					</section>	
+
 					<!--Activity Function-->
-					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+					<section data-transition="slide" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<h2 class="function-type-title">Function Types</h2>
 						<div class="simple-row space-between">
 							<div class="gif-sneak-peek">Client</div>
 							<div><h1>➡</h1></div>
@@ -135,8 +142,6 @@
 							<div class="fragment fade-in"><h1>➡</h1></div>
 							<div class="gif-sneak-peek fragment fade-in">Activity</div>
 						</div>
-					</section>
-					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e" data-background-image="./assets/unruly-orchestra.gif" data-background-size="cover">	
 						<aside class="notes" data-markdown>
 							- Just like a regular function BUT can only be triggered by ActivityTrigger
 							- Can accept input parameter from Orchestrator function
@@ -146,13 +151,14 @@
 							- Final result is returned to Orchestrator function (can be further processed)
 						</aside>
 					</section>
-					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#252525" data-background-image="./assets/activity-function.png" data-background-size="contain">	
-					</section>
-					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+
+					<!--Function Types Summary-->
+					<section data-transition="slide" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
+						<h2 class="function-type-title">Function Types</h2>
 						<div class="simple-row space-between func-type-summary">
-							<div class="fragment fade-in gif-sneak-peek client-func-gif">Client</div>
+							<div class="fragment fade-in gif-sneak-peek">Client</div>
 							<div class="fragment fade-in gif-sneak-peek orchestrator-func-gif">Orchestrator</div>
-							<div class="fragment fade-in gif-sneak-peek activity-func-gif">Activity</div>
+							<div class="fragment fade-in gif-sneak-peek">Activity</div>
 						</div>
 						<div class="simple-row centered fragment fade-in" style="margin-top: 30px;">
 							<div class="gif-sneak-peek new-gif-sneak-peek">Entity</div>
@@ -165,6 +171,7 @@
 						</aside>
 					</section>
 				</section>	
+				
 				<!--What's happening under the hood?-->
 				<section>
 					<div class="annotation">@adriennetacke</div>
@@ -196,10 +203,10 @@
 					<section data-background-video="./assets/wakeup.mp4" data-background-video-loop>
 					</section>
 					<section data-transition="slide" data-background-transition="slide">
-						<div class="gif-sneak-peek simple-row space-between">
-							<div class="gif-sneak-peek fragment fade-in">Result is stored</div>
+						<div class="simple-row space-between">
+							<div class="gif-sneak-peek fragment fade-in">💾 Result is stored</div>
 							<div class="gif-sneak-peek fragment fade-in">🔄 Reloads history</div>
-							<div class="gif-sneak-peek fragment fade-in">Decides</div>
+							<div class="gif-sneak-peek fragment fade-in">🤔 Decides</div>
 						</div>
 						<aside class="notes" data-markdown>
 						- Orchestrator restarts from first line
@@ -219,6 +226,7 @@
 					<section data-transition="slide" data-background-transition="slide">
 						<h1><span class="mango-highlight">Deterministic</span> Orchestrators</h1>
 						<h3 class="fragment fade-in" style="margin-top: 30px;">(in a single meme)</h3>
+						<h6 class="fragment fade-in" style="margin-top: 30px;">(also Rainer Stropek certified!)</h6>
 					</section>
 					<aside class="notes" data-markdown>
 					- No matter when or how often our Orchestration Function is called, the **_same_** result must be returned each time given the same input.
@@ -361,20 +369,19 @@
 						<h3 class="fragment fade-in" style="margin-top: 50px;">Also known as Polling Consumer pattern. When client calls HTTP API, 202 result and URLs to check status are returned</h3>
 					</section>
 					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/waiting.webp" data-background-size="cover">
+						<aside class="notes" data-markdown>
+							Problems when implemented with regular functions:
+							- Need to handle interactions with long-running executions
+	
+							How Durable Function makes it better:
+							- Built-in support
+							- Webhook HTTP APIs exposed for you
+							- It takes care of querying the orchestrator function status
+							- Also manages state, so you don't have to keep track of statuses
+							</aside>
 					</section>
 					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
 						<h2>Asking my mom to go to a party in high school.</h2>
-						<h3 style="margin-top: 30px;">Demo</h3>
-						<aside class="notes" data-markdown>
-						Problems when implemented with regular functions:
-						- Need to handle interactions with long-running executions
-
-						How Durable Function makes it better:
-						- Built-in support
-						- Webhook HTTP APIs exposed for you
-						- It takes care of querying the orchestrator function status
-						- Also manages state, so you don't have to keep track of statuses
-						</aside>
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
 						<div class="simple-row space-between">
@@ -405,11 +412,7 @@
 						<h2><span class="white-highlight">Monitor</span> pattern</h2>
 						<h3 class="fragment fade-in" style="margin-top: 30px;">Mirror of Async HTTP API. Orchestration polls a service at regular intervals.</h3>
 					</section>
-					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
-						<h2>Grandmother asks where grandchildren are.</h2>
-						<aside class="notes" data-markdown>
-						- orchestration polls some service at regular intervals. 
-						</aside>
+					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/monitor-pattern.gif">
 					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
 						<div class="simple-row space-between">
@@ -494,7 +497,7 @@
 				</section>
 				<section data-transition="slide" data-transition="fast" data-background-color="#ffcb2e" data-background-transition="slide" data-transition-speed="slow">
 					<div id="title-container">
-						<h1 class="delightful-title title" style="font-size: 5em!important;">Thank You NDC London!</h1>
+						<h1 class="delightful-title title" style="font-size: 5em!important;">Vielen Dank BASTA!</h1>
 						<div class="annotation" style= "font-size: 2em !important; margin-top:120px;">@adriennetacke</div>
 					</div>
 				</section>
