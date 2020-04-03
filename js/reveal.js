@@ -255,10 +255,10 @@
 
 			// The maximum number of pages a single slide can expand onto when printing
 			// to PDF, unlimited by default
-			pdfMaxPagesPerSlide: Number.POSITIVE_INFINITY,
+			pdfMaxPagesPerSlide: 1,
 
 			// Prints each fragment on a separate slide
-			pdfSeparateFragments: true,
+			pdfSeparateFragments: false,
 
 			// Offset used to reduce the height of content within exported PDF pages.
 			// This exists to account for environment differences based on how you
