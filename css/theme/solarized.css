@@ -409,43 +409,35 @@ h1.title:nth-child(2) {
 .func-type-summary .activity-func-gif {
   color: #ffffff !important; }
 
-.client-func-gif {
-  background-image: url("../../../assets/ipod-press-play.gif");
-  background-size: cover; }
-
 .orchestrator-func-gif {
-  background-image: url("../../../assets/conductor.gif");
-  background-size: cover; }
-
-.activity-func-gif {
-  background-image: url("../../../assets/unruly-orchestra.gif");
+  background-image: url("../../assets/conductor.gif");
   background-size: cover; }
 
 .lumpia-process-gif {
-  background-image: url("../../../assets/lumpia-process.webp");
+  background-image: url("../../assets/lumpia-process.webp");
   background-size: cover;
   background-position: center; }
 
 .lumpia-process-gif-contain {
-  background-image: url("../../../assets/lumpia-process.webp");
+  background-image: url("../../assets/lumpia-process.webp");
   background-size: contain; }
 
 .waiting-gif {
-  background-image: url("../../../assets/waiting.webp");
+  background-image: url("../../assets/waiting.webp");
   background-size: cover;
   background-position: center; }
 
 .monitor-pattern-gif {
-  background-image: url("../../../assets/monitor-pattern.gif");
+  background-image: url("../../assets/monitor-pattern.gif");
   background-size: cover;
   background-position: center; }
 
 .push-button-gif {
-  background-image: url("../../../assets/push-button.gif");
+  background-image: url("../../assets/push-button.gif");
   background-size: cover;
   background-position: center; }
 
 .aggregator-gif {
-  background-image: url("../../../assets/data-flow.gif");
+  background-image: url("../../assets/data-flow.gif");
   background-size: cover;
   background-position: center; }
