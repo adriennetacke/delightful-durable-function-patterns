@@ -359,9 +359,6 @@
 							- Also manages state, so you don't have to keep track of statuses
 							</aside>
 					</section>
-					<section data-transition="slide" data-background-transition="slide" data-background-color="#ffcb2e">
-						<h2>Asking my mom to go to a party in high school.</h2>
-					</section>
 					<section data-transition="fade-in-then-out" data-background-transition="fade-in-then-out" data-background-color="#ffcb2e">
 						<div class="simple-row space-between">
 							<div class="gif-sneak-peek white-background lumpia-process-gif">Function Chaining</div>
@@ -457,6 +454,8 @@
 							- Scattered over long-periods of time. 
 							- The aggregator might need to take action on event data as it arrives
 							- External clients may need to query the aggregated data.
+							- Tricky part about this pattern in normal functions is that it's a challenge to worry about multiple threads modifying data at the same time
+							- Also need to make sure that the aggregator itself is running on a single node at a time
 						</aside>
 					</section>
 					<section data-transition="fade-in" data-background-transition="fade-in-then-out" data-background-image="./assets/data-flow.gif">
@@ -476,7 +475,7 @@
 				</section>
 				<section data-transition="slide" data-transition="fast" data-background-color="#ffcb2e" data-background-transition="slide" data-transition-speed="slow">
 					<div id="title-container">
-						<h1 class="delightful-title title" style="font-size: 3em!important;">Thank you Scenic City Summit!</h1>
+						<h1 class="delightful-title title" style="font-size: 2.35em!important;">Thank you Scenic City Summit!</h1>
 						<div class="annotation" style= "font-size: 1em !important; margin-top:120px;">@adriennetacke</div>
 					</div>
 				</section>
