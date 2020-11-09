@@ -85,7 +85,7 @@ $selectionBackgroundColor: $magenta;
 }
 
 h1.title:nth-child(2) {
-	font-size: 2.35em !important;
+	font-size: 2.15em !important;
 	font-weight: 100 !important;
 }
 
@@ -104,10 +104,10 @@ h1.title:nth-child(2) {
 }
 
 .delightful-title {
-	animation: text-shadow 1.5s ease-in-out infinite;
-	line-height: 1;
-	margin-bottom: 80px !important;
-	font-size: 4em !important;
+	// animation: text-shadow 1.5s ease-in-out infinite;
+	line-height: 1.5;
+	margin-bottom: 20px !important;
+	font-size: 3em !important;
 	font-family: 'Lato', sans-serif;
 	color: #ffffff !important;
 }
